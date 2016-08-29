@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cssx-transpiler": {
+      "version": "5.2.0",
+      "resolved": "https://registry.npmjs.org/cssx-transpiler/-/cssx-transpiler-5.2.0.tgz",
+      "from": "cssx-transpiler@5.2.0"
+    }
+  }
+}
