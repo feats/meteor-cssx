@@ -10,11 +10,6 @@ Package.onUse(function(api) {
   api.use('isobuild:compiler-plugin@1.0.0');
   api.use(['babel-compiler', 'ecmascript'], ['server']);
 
-  // api.imply('modules');
-  // api.imply('ecmascript-runtime');
-  // api.imply('babel-runtime');
-  // api.imply('promise');
-
   api.addFiles('compiler.js', 'server');
   api.export('CssxCompiler', 'server');
 });

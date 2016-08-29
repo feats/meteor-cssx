@@ -8,8 +8,10 @@ export class CssxCompiler extends BabelCompiler {
     });
 
     this.options = {
-      sourcemap: true,
-      map: { inline: false, annotation: false },
+      minified: false,
+      compact: false,
+      concise: false,
+      quotes: false,
     };
 
     if (options) {
