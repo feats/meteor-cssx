@@ -1,33 +1,28 @@
-# cssnext for Meteor
+# cssx for Meteor
 
-Preprocess CSS4 syntax using [cssnext](https://github.com/cssnext/cssnext)
+Preprocess [CSSX syntax](https://github.com/krasimir/cssx)
 
-Files with the `next.css` extension will be compiled with package.
-You can also manually `@import` files named `xxx.import.next.css` as
-these will be excluded from the build pipeline.
+# Building a cssx extension package
 
-# Building a cssnext extension package
-
-`kit:cssnext` exports a global `CssnextCompiler` class which enables you to build extension packages that depend on this package.
+`quadric:cssx` exports a global `CssxCompiler` class which enables you to build extension packages that depend on this package.
 
 ## Example Usage
 
 ```
-// Meteor 1.2.x
+// Meteor 1.4.x
 
 /**
- * Transpile CSS4 syntax to CSS3 with cssnext
- * @param  {Object}  [cssnextOptions] cssnext compile options object
+ * Transpile CSSX syntax to JSX with cssx-transpiler
+ * @param  {Object}  [cssxOptions] cssx-transpile options object
  */
  Plugin.registerCompiler({
-   filenames: ['xxx.next.css'],
-   archMatching: 'web',
- }, function () { return new CssnextCompiler(cssnextOptions) } );
+   filenames: ['cssx'],
+ }, function () { return new CssxCompiler(cssxOptions) } );
 ```
 
 #### Install
 ```
-meteor add kit:cssnext
+meteor add quadric:cssx
 ```
 
 ---

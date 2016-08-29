@@ -1,39 +1,45 @@
-const cssnext = Npm.require('cssnext')
+import cssxTranspiler from 'cssx-transpiler';
 
-CssnextCompiler = class CssnextCompiler {
+export class CssxCompiler {
   constructor(options) {
     this.options = {
       sourcemap: true,
-      map: { inline: false, annotation: false }
+      map: { inline: false, annotation: false },
+    };
+
+    if (options) {
+      this.options = {
+        ...this.options,
+        ...options
+      };
     }
-
-    if (options) this.options = {...this.options, ...options}
-
   }
+
   processFilesForTarget (files) {
     files.forEach((compileStep) => {
       // skip import files
-      if (compileStep.getBasename().endsWith('import.next.css')) return
+      if (compileStep.getBasename().indexOf('.import.') !=-1) {
+        return;
+      }
 
-      let source = compileStep.getContentsAsString()
-      let filename = compileStep.getPathInPackage()
-      let options = {...this.options, from: filename}
+      const source = compileStep.getContentsAsString();
+      const filename = compileStep.getPathInPackage();
+      const options = {
+        ...this.options,
+        from: filename
+      };
 
       try {
-        let output = cssnext(source, options);
+        const output = cssxTranspiler(source, options);
+        console.log(output);
         // add the result to the app with sourcemaps
-        compileStep.addStylesheet({
+        compileStep.addJavaScript({
           path: filename,
-          data: output.css,
-          sourceMap: JSON.stringify(output.map)
+          data: output,
+          // sourceMap: JSON.stringify(output.map)
         });
       } catch( e ) {
-        compileStep.error({
-          message: "cssnext compiler error: " + e.message,
-          sourcePath: e.filename || filename,
-          line: e.line,
-          column: e.column + 1
-        });
+        compileStep.error(e);
       }
     })
   }
