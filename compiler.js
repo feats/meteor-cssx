@@ -31,10 +31,10 @@ export class CssxCompiler extends BabelCompiler {
 
     try {
       output = cssxTranspiler(source, this.options);
-    } catch(e) {
-      compileStep.error(e);
-    }
 
-    return super.processOneFileForTarget(file, output);
+      return super.processOneFileForTarget(file, output);
+    } catch(e) {
+      file.error(e);
+    }
   }
 }
