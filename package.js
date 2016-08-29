@@ -8,7 +8,12 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.use('isobuild:compiler-plugin@1.0.0');
-  api.use(['ecmascript'], ['server']);
+  api.use(['babel-compiler', 'ecmascript'], ['server']);
+
+  // api.imply('modules');
+  // api.imply('ecmascript-runtime');
+  // api.imply('babel-runtime');
+  // api.imply('promise');
 
   api.addFiles('compiler.js', 'server');
   api.export('CssxCompiler', 'server');
@@ -23,9 +28,9 @@ Npm.depends(npmDependencies)
 Package.registerBuildPlugin({
   npmDependencies,
   name: 'cssx',
-  use: ['ecmascript'],
+  use: ['babel-compiler', 'ecmascript'],
   sources: [
     'compiler.js',
-    'plugin/cssx.js'
+    'plugin.js'
   ],
 });

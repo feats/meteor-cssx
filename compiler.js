@@ -1,7 +1,12 @@
 import cssxTranspiler from 'cssx-transpiler';
 
-export class CssxCompiler {
+export class CssxCompiler extends BabelCompiler {
   constructor(options) {
+    super({
+      ...Babel.getDefaultOptions(),
+      react: true,
+    });
+
     this.options = {
       sourcemap: true,
       map: { inline: false, annotation: false },
@@ -15,32 +20,19 @@ export class CssxCompiler {
     }
   }
 
-  processFilesForTarget (files) {
-    files.forEach((compileStep) => {
-      // skip import files
-      if (compileStep.getBasename().indexOf('.import.') !=-1) {
-        return;
-      }
+  processOneFileForTarget (file, source) {
+    let output;
 
-      const source = compileStep.getContentsAsString();
-      const filename = compileStep.getPathInPackage();
-      const options = {
-        ...this.options,
-        from: filename
-      };
+    if (typeof source !== "string") {
+      source = file.getContentsAsString();
+    }
 
-      try {
-        const output = cssxTranspiler(source, options);
-        console.log(output);
-        // add the result to the app with sourcemaps
-        compileStep.addJavaScript({
-          path: filename,
-          data: output,
-          // sourceMap: JSON.stringify(output.map)
-        });
-      } catch( e ) {
-        compileStep.error(e);
-      }
-    })
+    try {
+      output = cssxTranspiler(source, this.options);
+    } catch(e) {
+      compileStep.error(e);
+    }
+
+    return super.processOneFileForTarget(file, output);
   }
 }

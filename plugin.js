@@ -1,4 +1,4 @@
-import { CssxCompiler } from '../compiler';
+import { CssxCompiler } from './compiler';
 
 Plugin.registerCompiler({
   extensions: ['cssx'],
