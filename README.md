@@ -6,7 +6,41 @@ Preprocess [CSSX syntax](https://github.com/krasimir/cssx)
 
 `quadric:cssx` exports a global `CssxCompiler` class which enables you to build extension packages that depend on this package.
 
-## Example Usage
+## Install
+```
+meteor add quadric:cssx
+```
+
+## Usage
+
+Just create `*.cssx` files in your codebase and import them whenever you need it.
+
+```js
+// myComponent.cssx
+
+export default ({ margin }) => (
+  <style>
+    div {
+      margin: {{ margin }}px;
+      background-color: #F9F9F9;
+    }
+  </style>
+);
+```
+
+```js
+// myComponent.jsx
+import style from './myComponent.cssx';
+
+export default = () => (
+  <div style={style({ margin: 10}).div}>
+    Hello World!
+  </div>
+);
+```
+
+
+## Extending it
 
 ```
 // Meteor 1.4.x
@@ -20,10 +54,6 @@ Preprocess [CSSX syntax](https://github.com/krasimir/cssx)
  }, function () { return new CssxCompiler(cssxOptions) } );
 ```
 
-#### Install
-```
-meteor add quadric:cssx
-```
 
 ---
 
