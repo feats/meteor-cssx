@@ -41,7 +41,7 @@ import rules from './myComponent.cssx';
 
 const style = rules({ margin: 10});
 
-export default = () => (
+export default () => (
   <div style={style.div}>
     <span style={style['div span']}>Hello World!</span>
   </div>
@@ -58,7 +58,7 @@ import rules from './myComponent.cssx';
 
 const style = rules({ margin: 10});
 
-export default = () => (
+export default () => (
   <CSSX style={style}>
     <div>
       <span>Hello World!</span>
