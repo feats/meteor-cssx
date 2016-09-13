@@ -54,7 +54,7 @@ Install the [CSSX wrapper](https://github.com/krasimir/react-cssx) and let it ap
 ```js
 // myComponent.jsx
 import CSSX from 'react-cssx';
-import style from './myComponent.cssx';
+import rules from './myComponent.cssx';
 
 const style = rules({ margin: 10});
 
