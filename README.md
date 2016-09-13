@@ -59,7 +59,7 @@ import rules from './myComponent.cssx';
 const style = rules({ margin: 10});
 
 export default () => (
-  <CSSX style={style}>
+  <CSSX styles={style}>
     <div>
       <span>Hello World!</span>
     </div>
